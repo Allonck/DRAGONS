@@ -1,9 +1,9 @@
 from astrodata import (astro_data_tag, astro_data_descriptor, returns_list,
                        TagSet, Section)
-from ..soar import AstroDataSOAR
+from ..soar import AstroDataSoar
 from . import lookup
 
-class AstroDataGoodman(AstroDataSOAR):
+class AstroDataGhts(AstroDataSoar):
 
     @staticmethod
     def _matches_data(source):
@@ -11,7 +11,7 @@ class AstroDataGoodman(AstroDataSOAR):
 
     @astro_data_tag
     def _tag_instrument(self):
-        return TagSet(['GOODMAN'])
+        return TagSet(['GHTS'])
     
     @astro_data_tag
     def _tag_arc(self):
@@ -144,14 +144,14 @@ class AstroDataGoodman(AstroDataSOAR):
         ----------
         generic: boolean
             If set, don't specify the specific instrument if there are clones
-            (e.g., return "ghst" rather than "ghst_red" or "ghst_blue")
+            (e.g., return "ghts" rather than "ghts_red" or "ghts_blue")
 
         Returns
         -------
         str
             instrument name
         """
-        return 'ghst' if generic else self.phu.get('INSTRUME')
+        return 'ghts' if generic else self.phu.get('INSTRUME')
 
     @astro_data_descriptor
     def wavelength_config(self):

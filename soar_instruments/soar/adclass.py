@@ -52,7 +52,7 @@ soar_keyword_names = dict( #Those with the '#' aren't implemented yet
     grating_angle = 'GRT_ANG', #
     grating_target = 'GRT_TARG', #
     hour_angle = 'HA', 
-    instrument = 'INSTRUME', 
+    instrument = 'INSTRUME', #This is INSTR for TRIPLESPEC
     local_sidereal_time = 'LST', 
     environment_wind_at_start = 'ENVWIN',
     environment_atm_pressure_at_start = 'ENVPRE', 
@@ -71,7 +71,14 @@ soar_keyword_names = dict( #Those with the '#' aren't implemented yet
     slit = 'SLIT',
     trim_section = 'TRIMSEC',
     ut_time = 'UT', 
-    wavelength_config = 'WAVMODE'
+    wavelength_config = 'WAVMODE' #Till here are from ghts
+    # fowler_samples = 'FSAMPLE',
+    # coadds = 'COADSS',
+    # mode_name = 'MODENAME',
+    # total_integration_time = 'ITOT',
+    # max_linearity_corr = 'LINCRMAX',
+    #
+
 )
 
 def use_keyword_if_prepared(fn):
@@ -93,7 +100,7 @@ def use_keyword_if_prepared(fn):
 
 
 # ------------------------------------------------------------------------------
-class AstroDataSOAR(AstroData):
+class AstroDataSoar(AstroData):
     __keyword_dict = soar_keyword_names
 
     @staticmethod
@@ -599,7 +606,7 @@ class AstroDataSOAR(AstroData):
     @astro_data_descriptor
     def wavelength_config(self):
         """
-        Returns the mode of observation in SOAR. For goodman spectropraph it
+        Returns the mode of observation in SOAR. For ghts spectropraph it
          will return the current configurations modes for the grating. Typical
           modes includes 400_M1, 400_M2.
 

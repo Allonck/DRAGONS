@@ -1,9 +1,9 @@
 import re
 
 from astrodata import astro_data_tag, TagSet, astro_data_descriptor, returns_list
-from ..soar import AstroDataSOAR
+from ..soar import AstroDataSoar
 
-class AstroDataSAMI(AstroDataSOAR):
+class AstroDataSAMI(AstroDataSoar):
     __keyword_dict = dict(data_section = 'DATASEC',
                           gain = 'GAIN',
                           )
