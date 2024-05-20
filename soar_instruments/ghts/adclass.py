@@ -52,7 +52,8 @@ class AstroDataGhts(AstroDataSoar):
             '600_SYZY': 'GRATING_600',
             '930_SYZY': 'GRATING_930',
             '1200_SYZY': 'GRATING_1200',
-            '2100_SYZY': 'GRATING_2100'
+            '2100_SYZY': 'GRATING_2100',
+            'NO_GRATING': 'NO_GRATING'
         }
 
         grating_value = self.phu.get('GRATING')
@@ -165,6 +166,18 @@ class AstroDataGhts(AstroDataSoar):
 
         """
         return self.phu.get('WAVMODE')
+    @astro_data_descriptor
+    def detector_roi_setting(self):
+        """
+        Looks at the ROI and returns a descriptive string describing it
+        These are more or less the options in the OT
+
+        Returns
+        -------
+        str
+            Name of the ROI setting used in the header
+        """
+        return self.phu.get('ROI')
 
     # @astro_data_descriptor
     # def ra(self):
