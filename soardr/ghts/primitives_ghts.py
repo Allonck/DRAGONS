@@ -4,6 +4,9 @@
 #                                                          primitives_ghts.py
 # ------------------------------------------------------------------------------
 from gempy.gemini import gemini_tools as gt
+from soar_instruments.ghts import (lookup as adlookup)
+
+from inspect import isclass, currentframe
 
 from ..soar.primitives_soar import Soar
 from . import parameters_ghts
@@ -19,12 +22,24 @@ class GHTS(Soar):
     tagset = {"GHTS"}
 
     def _initialize(self, adinputs, **kwargs):
-        self.inst_lookups = 'geminidr.gmos.lookups'
+        self.inst_lookups = 'soardr.ghst.lookups'
         self.inst_adlookup = adlookup
         super()._initialize(adinputs, **kwargs)
         self._param_update(parameters_ghts)
 
-    def gudayMate(self, *args, **kwargs):
+    def _param_update(self, module):
+        """Create/update an entry in the primitivesClass's params dict;
+        this will be initialized later"""
+        for attr in dir(module):
+            obj = getattr(module, attr)
+            if isclass(obj) and issubclass(obj, config.Config):
+                # Allow classes purely for inheritance purposes to be ignored
+                # Wanted to use hasattr(self) but things like NearIR don't inherit
+                if attr.endswith("Config"):
+                    primname = attr.replace("Config", "")
+                    self.params[primname] = obj()
+
+    def gudayMate(self, adinputs=None, **params):
 
         log = self.log
         log.stdinfo(gt.log_message("primitive", self.myself(), "starting"))
