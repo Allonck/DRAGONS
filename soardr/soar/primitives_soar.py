@@ -5,7 +5,8 @@
 # ------------------------------------------------------------------------------
 from gempy.gemini import gemini_tools as gt
 
-from soardr import PrimitivesSoarBASE
+from soardr import PrimitivesSoarBASE #This was the previous
+#from geminidr import PrimitivesBASE
 
 from ..utils.logging_handlers import log_adjust
 # ------------------------------------------------------------------------------
